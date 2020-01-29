@@ -1,0 +1,44 @@
+<ion-content color="dark">
+  <form [formGroup]="formUser" (ngSubmit)="onClickSubmit(formUser.value)">
+    <ion-list class="ion-list" color="dark">
+      
+      <div padding color="dark"></div>
+                  
+      <ion-img src="assets/img/m-white.png" class="ion-img"></ion-img>
+      <div padding></div>
+      <div padding></div>
+      <ion-item color="dark" [class]="errorNick">
+        <ion-label position="floating">
+          <ion-icon name="person" slot="start"></ion-icon> Nick
+        </ion-label>
+        <ion-input type="text" required="true" formControlName="nick" name="nick"></ion-input>
+      </ion-item>
+
+      <ion-item color="dark" [class]="errorPassword">
+        <ion-label position="floating">
+          <ion-icon name="key" slot="start"></ion-icon> Senha
+        </ion-label>
+        <ion-input type="password" required="true" formControlName="password" name="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-link-right">
+      Esqueceu a senha? <a [routerLink]="['home']"> Nova</a>
+    </div>
+
+    <div padding></div>
+    <div padding></div>
+    <div padding></div>
+    <ion-button  type="submit" color="danger" expand="block" size="large" class="ion-button" [disabled]="!formUser.valid">Entrar</ion-button>
+
+    <div padding></div>
+    <div padding></div>
+    <div padding></div>
+    <div class="ion-link-center">
+      É novo por aqui? <a [routerLink]="['register']">Cadastre-se</a>
+    </div>
+
+  </form>  
+
+</ion-content>
