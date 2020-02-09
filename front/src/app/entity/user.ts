@@ -4,10 +4,10 @@ import { Role } from './role';
 
 export class User {
    iduser: number;
-   email: String;
+   email: string;
+   nick: string;
    password: string;
    status: string;
-   username: string;
    role: Role
    person: Person;
   }

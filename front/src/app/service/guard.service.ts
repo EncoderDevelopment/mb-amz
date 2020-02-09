@@ -7,16 +7,21 @@ import { AuthService } from './auth.service';
 })
 export class GuardService implements CanActivate{
   constructor(private auth: AuthService) { }
+  user:any;
 
-  canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot) {      
-    if (this.auth.getUser() != null) {      
-      this.auth.isLogin = true;    
-      return true;
-    } else {      
-      this.auth.isLogin = false;
-      window.location.href = "/"
+  async canActivate(route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot) {
+    return await this.auth.getStorage().get('user').then((user) => {     
+      if (user != null) {        
+        this.auth.isLogin = true;
+        return true;
+      } else {
+        this.auth.isLogin = false;
+        window.location.href = "/"
+        return false;
+      }
+    }).catch(()=>{
       return false;
-    }
-  }          
+    });    
+  }
 }

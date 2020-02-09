@@ -13,8 +13,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	User findByEmail(String email);
 	
-	User findByNick(String nick);	
+	User findByNick(String nick);
+		
+	User findByNickAndStatus(String nick , StatusEnum status);	
 	
+	User findByToken(String token);
+		
 	User findByTokenAndStatus(String token, StatusEnum status);
 
 }

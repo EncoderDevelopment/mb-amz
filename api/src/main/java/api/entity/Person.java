@@ -28,4 +28,12 @@ public class Person{
 	@Getter @Setter private String  doc;
 	@Getter @Setter private String  telephone;	
 	@Getter @Setter private String 	sponsor;
+	
+	public Person(String name, String telephone, String gender, String doc, String sponsor) {
+		this.name = name;
+		this.telephone = telephone;
+		this.gender = gender;
+		this.doc = doc;
+		this.sponsor = sponsor;		
+	}
 }

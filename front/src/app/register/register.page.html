@@ -1,51 +1,53 @@
 <ion-content color="dark">
+<ion-header>
   <ion-toolbar color="dark">
     <ion-title>Cadastro</ion-title>
   </ion-toolbar>
+</ion-header>
 
-  <form [formGroup]="formRegister" (ngSubmit)="onClickSubmit(formRegister.value)">
+  <form [formGroup]="formRegister" (ngSubmit)="onClickSubmit(formRegister)">
     <ion-list class="ion-list" color="dark">  
       
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="contacts" slot="start"></ion-icon> Patrocinador
         </ion-label>
-        <ion-input type="text" required="true" formControlName="sponsor" name="sponsor"></ion-input>
+        <ion-input type="text" required="true" formControlName="sponsor" name="sponsor" (click)="itemClick('sponsor')"></ion-input>
       </ion-item>   
 
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="person" slot="start"></ion-icon> Nome completo
         </ion-label>
-        <ion-input type="text" required="true" formControlName="name" name="name"></ion-input>
+        <ion-input type="text" required="true" formControlName="name" name="name" (click)="itemClick('name')"></ion-input>
       </ion-item>    
 
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="at" slot="start"></ion-icon> Email
         </ion-label>
-        <ion-input type="email" required="true" formControlName="email" name="email"></ion-input>
+        <ion-input type="email" required="true" formControlName="email" name="email"  (click)="itemClick('email')"></ion-input>
       </ion-item>
 
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="document" slot="start"></ion-icon> CPF/CNPJ
         </ion-label>
-        <ion-input type="text" required="true" formControlName="doc" name="doc"></ion-input>
+        <ion-input type="text" required="true" formControlName="doc" name="doc" (click)="itemClick('doc')"></ion-input>
       </ion-item>
 
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="tablet-portrait" slot="start"></ion-icon> Telefone com ddd
         </ion-label>
-        <ion-input type="text" required="true" formControlName="phone" name="phone"></ion-input>
+        <ion-input type="text" required="true" formControlName="telephone" name="telephone" (click)="itemClick('telephone')"></ion-input>
       </ion-item>
 
       <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="female" slot="start"></ion-icon><ion-icon name="male" slot="start"></ion-icon> Gênero
         </ion-label>
-        <ion-select placeholder="Selecione o gênero" color="dark">
+        <ion-select placeholder="Selecione o gênero" color="dark" (click)="itemClick('gender')" formControlName="gender">
           <ion-select-option value="M" color="dark">Masculino</ion-select-option>
           <ion-select-option value="F" color="dark">Feminino</ion-select-option>
         </ion-select>
@@ -55,26 +57,26 @@
         <ion-label position="floating">
           <ion-icon name="finger-print" slot="start"></ion-icon> Nick de acesso
         </ion-label>
-        <ion-input type="text" required="true" formControlName="nick" name="nick"></ion-input>
+        <ion-input type="text" required="true" formControlName="nick" name="nick" (click)="itemClick('nick')"></ion-input>
       </ion-item>
 
-      <ion-item color="dark" [class]="errorPassword">
+      <ion-item color="dark">
         <ion-label position="floating">
           <ion-icon name="key" slot="start"></ion-icon> Senha
         </ion-label>
-        <ion-input type="password" required="true" formControlName="password" name="password"></ion-input>
+        <ion-input type="password" required="true" formControlName="password" name="password" (click)="itemClick('password')"></ion-input>
       </ion-item>
 
-      <ion-item color="dark" [class]="errorPassword">
+      <ion-item color="dark" >
         <ion-label position="floating">
           <ion-icon name="unlock" slot="start"></ion-icon> Confirme a Senha
         </ion-label>
-        <ion-input type="password" required="true" formControlName="confirmPassword" name="confirmPassword"></ion-input>
+        <ion-input type="password" required="true" formControlName="confirmPassword" name="confirmPassword"  (click)="itemClick('confirm')"></ion-input>
       </ion-item>
 
     </ion-list>   
     <div padding></div>
-    <ion-button  type="submit" color="danger" expand="block" size="large" class="ion-button">Salvar</ion-button>   
+    <ion-button  type="submit" color="danger" expand="block" size="large" class="ion-button" [disabled]="!formRegister.valid">Salvar</ion-button>   
   </form>  
 
 </ion-content>

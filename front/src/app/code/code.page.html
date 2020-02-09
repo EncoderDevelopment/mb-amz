@@ -1,0 +1,28 @@
+<ion-content color="dark">
+  <ion-header color="dark">
+    <ion-toolbar color="dark">
+      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-title>Código</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="formCode" (ngSubmit)="onClickSubmit(formCode)">
+    <ion-list class="ion-list" color="dark" style="margin-top: 10%;">
+      <div class="ion-padding"></div>
+      <div class="ion-padding"></div>
+      <div class="ion-padding"></div>
+      <ion-item color="dark">
+        <ion-label position="floating">
+          <ion-icon name="code-working" slot="start"></ion-icon> Token
+        </ion-label>
+        <ion-input type="number" required="true" formControlName="code" name="code" (click)="itemClick()"
+          (keyup)="keyup()"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding"></div>
+    <ion-button type="submit" color="danger" expand="block" size="large" class="ion-button"
+      [disabled]="!formCode.valid">Salvar</ion-button>
+  </form>
+
+</ion-content>

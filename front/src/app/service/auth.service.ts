@@ -5,29 +5,36 @@ import { Token } from '../entity/token';
 import { ToastService } from './toast.service';
 import { Storage } from '@ionic/storage';
 import { apiBase, apiToken, apiLogin } from '../const/api';
+import { User } from '../entity/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public isLogin: boolean;
+  public isLogin: boolean;  
 
   constructor(private http: HttpClient,
     private toast: ToastService,
     private storage: Storage) { }
 
-  login(email: string, password: string) {
+  login(email: string, password: string) {    
     this.autenticatedForToken(email, password);
   }
 
   autenticatedForToken(nick: string, password: string) {
     this.http.post<Token>(apiBase + apiToken, params, { headers: httpHeadersToken }).subscribe((token: Token) => {      
-      this.http.post(apiBase + apiLogin, this.param(nick, password), { headers: this.httpHeadersRequest(token) }).subscribe((response: any) => {
-        this.toast.showSingleToast("success");
-        window.location.href = "home"
+      this.http.post(apiBase + apiLogin, this.param(nick, password), { headers: this.httpHeadersRequest(token) }).subscribe((r: any) => {        
+        this.save('user', r.user);
+        this.toast.showSingleToast(r.responseValidate.description);
+        setTimeout(() => {
+            window.location.href = "home"  
+        }, 2000);
+        
+      }, e => {
+        this.toast.showSingleToast(e.error.responseValidate.description);      
       });
-    }, httpError => {
-      this.toast.showSingleToast(httpError.message);      
+    }, e => {
+      this.toast.showSingleToast(e.message);      
     });
   }
 
@@ -46,8 +53,11 @@ export class AuthService {
     return this.save(key, user);
   }
 
-  public getUser() {
-    return this.storage.get("user");
+  public remove(){
+    this.storage.remove('user');
   }
 
+  public getStorage(){
+    return this.storage;
+  }
 }
