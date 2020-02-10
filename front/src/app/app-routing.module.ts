@@ -11,10 +11,13 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
+  }, 
   {
     path: 'home', canActivate: [GuardService],
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    data: {
+      preload: true
+    }
   },
   {
     path: 'list',  canActivate: [GuardService],

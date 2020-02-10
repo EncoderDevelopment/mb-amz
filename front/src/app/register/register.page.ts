@@ -48,9 +48,7 @@ export class RegisterPage implements OnInit {
 
   onClickSubmit(form) {    
       this.http.post<Token>(apiBase + apiToken, params, { headers: httpHeadersToken }).subscribe((token: Token) => {
-        this.http.post<User>(apiBase + register, this.newUser(form), { headers: this.httpHeadersRequest(token) }).subscribe((r: any) => {
-          console.log(r);
-          if (r.field === 'sucesso')
+        this.http.post<User>(apiBase + register, this.newUser(form), { headers: this.httpHeadersRequest(token) }).subscribe((r: any) => {                    
             window.location.href = "code"
         }, e => {          
           this.validator(e);

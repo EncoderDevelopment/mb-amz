@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastService } from '../service/toast.service';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,9 @@ export class LoginPage implements OnInit {
 
   constructor(private auth: AuthService,
     private formBuilder: FormBuilder,
-    private toast: ToastService) {      
+    private toast: ToastService,
+    public navCtrl: NavController) {    
+      this.auth.isProgress = false;
       this.redirect();
      }
 
@@ -30,15 +34,18 @@ export class LoginPage implements OnInit {
 
   async redirect(){
     return await this.auth.getStorage().get('user').then((user) => {     
-      if (user != null)
-        window.location.href = "home"    
+      if (user != null){
+        setTimeout(() => {
+          this.navCtrl.navigateRoot('home');        
+        }, 1000);
         
+      }
     }).catch(()=>{
       
     });    
   }
 
-  onClickSubmit(form) {
+  onClickSubmit(form) {    
     this.auth.login(form.nick, form.password);       
   }
 

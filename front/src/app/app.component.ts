@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
-import { GuardService } from './service/guard.service';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -15,14 +13,22 @@ import { AuthService } from './service/auth.service';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
+      title: 'Inicio',
       url: '/home',
       icon: 'home'
+
     },
     {
-      title: 'List',
+      title: 'Pontos',
       url: '/list',
-      icon: 'list'
+      icon: 'analytics'
+
+    },
+    {
+      title: 'Patrocinados',
+      url: '/list',
+      icon: 'medal'
+
     }
   ];
 
@@ -30,15 +36,30 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private auth: AuthService    
+    private auth: AuthService,
+    public navCtrl: NavController
   ) {
+    this.auth.isProgress = false;
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      setTimeout(() => {
+        this.splashScreen.hide();
+      }, 1000);
     });
+  }
+
+  exit() {
+    this.auth.isProgress = true;       
+    this.auth.isLogin = false;    
+    this.auth.remove();
+
+    setTimeout(() => {
+      this.navCtrl.navigateRoot('/');     
+    }, 1000);
+    
   }
 }

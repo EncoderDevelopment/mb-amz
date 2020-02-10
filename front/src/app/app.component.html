@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app  color="dark" class="md">  
     <ion-split-pane contentId="main-content" color="dark">
     <ion-menu contentId="main-content" type="overlay" *ngIf=auth.isLogin color="dark">
       <ion-header color="dark">
@@ -7,20 +7,30 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content color="dark" style=" width: 95%; ">
+      <ion-content color="dark" style=" width: 95%; ">        
         <ion-list color="dark" style="padding: 0;">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages" color="dark">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" color="dark">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" color="dark" >
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
+      
 
+        <ion-menu-toggle auto-hide="false"  color="dark">
+          <ion-item (click)="exit()" [routerDirection]="'root'" [routerLink]=" " color="dark" >            
+            <ion-icon slot="start" name="exit"></ion-icon>
+            <ion-label>
+              Sair
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+      </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+  </ion-split-pane>  
+  <ion-progress-bar color="secondary" type="indeterminate" *ngIf=auth.isProgress></ion-progress-bar> 
 </ion-app >

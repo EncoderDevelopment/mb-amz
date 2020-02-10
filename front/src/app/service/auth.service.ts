@@ -6,35 +6,42 @@ import { ToastService } from './toast.service';
 import { Storage } from '@ionic/storage';
 import { apiBase, apiToken, apiLogin } from '../const/api';
 import { User } from '../entity/user';
+import { NavController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public isLogin: boolean;  
+  public isProgress: boolean;  
 
   constructor(private http: HttpClient,
-    private toast: ToastService,
-    private storage: Storage) { }
+              private toast: ToastService,
+              private storage: Storage,
+              public navCtrl: NavController) 
+              { 
+                this.isProgress = false;  
+              }
 
   login(email: string, password: string) {    
     this.autenticatedForToken(email, password);
   }
 
   autenticatedForToken(nick: string, password: string) {
+    this.isProgress = true;
     this.http.post<Token>(apiBase + apiToken, params, { headers: httpHeadersToken }).subscribe((token: Token) => {      
       this.http.post(apiBase + apiLogin, this.param(nick, password), { headers: this.httpHeadersRequest(token) }).subscribe((r: any) => {        
-        this.save('user', r.user);
-        this.toast.showSingleToast(r.responseValidate.description);
-        setTimeout(() => {
-            window.location.href = "home"  
-        }, 2000);
-        
+        this.save('user', r.user);      
+        this.navCtrl.navigateRoot('home');
+        this.isProgress = false;          
       }, e => {
+        this.isProgress = false;
         this.toast.showSingleToast(e.error.responseValidate.description);      
       });
     }, e => {
-      this.toast.showSingleToast(e.message);      
+      this.isProgress = false;
+      this.toast.showSingleToast("Servidor indisponível no momento");      
     });
   }
 
@@ -54,7 +61,7 @@ export class AuthService {
   }
 
   public remove(){
-    this.storage.remove('user');
+    this.storage.clear();
   }
 
   public getStorage(){

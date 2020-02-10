@@ -47,9 +47,9 @@
         <ion-label position="floating">
           <ion-icon name="female" slot="start"></ion-icon><ion-icon name="male" slot="start"></ion-icon> Gênero
         </ion-label>
-        <ion-select placeholder="Selecione o gênero" color="dark" (click)="itemClick('gender')" formControlName="gender">
-          <ion-select-option value="M" color="dark">Masculino</ion-select-option>
-          <ion-select-option value="F" color="dark">Feminino</ion-select-option>
+        <ion-select placeholder="Selecione o gênero" (click)="itemClick('gender')" formControlName="gender">
+          <ion-select-option value="M">Masculino</ion-select-option>
+          <ion-select-option value="F">Feminino</ion-select-option>
         </ion-select>
       </ion-item>        
 

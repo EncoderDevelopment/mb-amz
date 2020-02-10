@@ -6,19 +6,20 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class GuardService implements CanActivate{
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
   user:any;
 
   async canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    return await this.auth.getStorage().get('user').then((user) => {     
-      if (user != null) {        
+    return await this.auth.getStorage().get('user').then((user) => {           
+      if (user != null) {                      
         this.auth.isLogin = true;
         return true;
       } else {
-        this.auth.isLogin = false;
-        window.location.href = "/"
-        return false;
+        this.auth.isLogin = true;
+        //this.router.navigate(['/'])  
+        return true;
       }
     }).catch(()=>{
       return false;
