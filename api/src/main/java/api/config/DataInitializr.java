@@ -53,9 +53,9 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
             		Strategy.getCodeValidationToken(), StatusEnum.ACTAVTED, RoleEnum.ROLE_ADMIN, 
             		createPerson("Enoder", "Tokenize" , "S" , "Tokenize", "Encoder"));
                                 	        	
-            createUser("signa.roberto@gmail.com", "macross7" , passwordEncoder.encode("dra228609"), Strategy.getCodeValidationToken(), 
+            createUser("sr@gmail.com", "macross7" , passwordEncoder.encode("2266867"), Strategy.getCodeValidationToken(), 
             		StatusEnum.ACTAVTED, RoleEnum.ROLE_ADMIN, 
-            		createPerson("Davi Roberto", "92991578721" , "M" , "86314424291", "macross7"));           
+            		createPerson("Davi Roberto", "92987765500" , "M" , "68513328190", "macross7"));           
         }
 
     }
